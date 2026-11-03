@@ -51,7 +51,6 @@ export function getAdminNavGroups(): AdminNavGroup[] {
       label: "Plans & Access",
       icon: <Crown className="w-[18px] h-[18px]" />,
       items: [
-        { label: "Plan Overview", path: "/admin/membership", icon: <span className="text-xs">🎫</span>, exact: true, implemented: true },
         { label: "Plans & Variants", path: "/admin/membership/plans", icon: <span className="text-xs">💳</span>, implemented: true },
         { label: "Access Passes", path: "/admin/membership/access-passes", icon: <span className="text-xs">🎟️</span>, implemented: true },
         { label: "Feature Defaults", path: "/admin/membership/features", icon: <span className="text-xs">🧩</span>, implemented: true },

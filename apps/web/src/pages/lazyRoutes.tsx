@@ -157,7 +157,6 @@ export const HighStreetsPage = lazy(() => import("@/pages/admin/activation/HighS
 export const BackerDashboardPage = lazy(() => import("@/pages/BackerDashboardPage"));
 export const FoundingMemberDashboardPage = lazy(() => import("@/pages/FoundingMemberDashboardPage"));
 export const AdminFoundingMembersPage = lazy(() => import("@/pages/admin/AdminFoundingMembersPage"));
-export const AdminMembershipPage = lazy(() => import("@/pages/admin/AdminMembershipPage"));
 export const AdminPlansPage = lazy(() => import("@/pages/admin/AdminPlansPage").then(m => ({ default: m.AdminPlansPage })));
 export const AdminPlanFormPage = lazy(() => import("@/pages/admin/plans/PlanFormPage"));
 export const AdminAccessPassFormPage = lazy(() => import("@/pages/admin/plans/AccessPassFormPage"));
@@ -184,7 +183,6 @@ export const BusinessPlanPage = lazy(() => import("@/pages/business-owner/Busine
 export const BusinessMyCampaignDetailPage = lazy(() => import("@/pages/business-owner/MyCampaignDetailPage"));
 
 export const FoundingMembersPage = lazy(() => import("@/pages/admin/AdminFoundingMembersPage"));
-export const MembershipPage = lazy(() => import("@/pages/admin/AdminMembershipPage"));
 export const BusinessCampaignsPage = lazy(() => import("@/pages/admin/business-owners/BusinessCampaignsPage").then(m => ({ default: m.BusinessCampaignsPage })));
 export const InStoreContributionsPage = lazy(() => import("@/pages/admin/business-owners/InStoreContributionsPage").then(m => ({ default: m.InStoreContributionsPage })));
 export const BusinessContributionsPage = lazy(() => import("@/pages/admin/business-owners/BusinessContributionsPage").then(m => ({ default: m.BusinessContributionsPage })));

@@ -128,6 +128,23 @@ export default function PlanFormPage() {
     });
   };
 
+  const handleSave = () => {
+    if (!draft) return;
+    const invalidVariants = draft.variants.filter((variant) =>
+      priceError(variant.pricePounds),
+    );
+    if (invalidVariants.length > 0) {
+      setError(
+        `Every variant must have a price greater than £0. Set a valid price for ${invalidVariants
+          .map((variant) => ACCESS_LABELS[variant.accessLevel])
+          .join(", ")}.`,
+      );
+      return;
+    }
+    setError(null);
+    save.mutate(draft);
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -153,7 +170,7 @@ export default function PlanFormPage() {
             Cancel
           </Link>
           <button
-            onClick={() => save.mutate(draft)}
+            onClick={handleSave}
             disabled={save.isPending || !draft.name.trim()}
             className="inline-flex items-center gap-2 rounded-xl bg-primary-600 px-4 py-2.5 text-sm font-bold text-white hover:bg-primary-700 disabled:opacity-50"
           >
@@ -320,11 +337,11 @@ export default function PlanFormPage() {
                       <div className="grid gap-3 sm:grid-cols-2">
                         <Field
                           label="Price (£)"
-                          hint="Enter the price in pounds, for example 150 or 149.99. The backend stores it in pence for MCOM Pay."
+                          hint="Enter the price in pounds, for example 150 or 149.99. Every variant must be greater than £0. The backend stores it in pence for MCOM Pay."
                         >
                           <input
                             type="number"
-                            min={0}
+                            min={0.01}
                             step="0.01"
                             value={variant.pricePounds}
                             onChange={(e) =>
@@ -332,11 +349,18 @@ export default function PlanFormPage() {
                                 pricePounds: e.target.value,
                               })
                             }
+                            aria-invalid={Boolean(priceError(variant.pricePounds))}
                             className="input-field"
                           />
-                          <p className="mt-1 text-[11px] text-gray-400">
-                            {fmtGbp(priceToPence(variant.pricePounds))}
-                          </p>
+                          {priceError(variant.pricePounds) ? (
+                            <p className="mt-1 text-[11px] font-medium text-rose-600">
+                              {priceError(variant.pricePounds)}
+                            </p>
+                          ) : (
+                            <p className="mt-1 text-[11px] text-gray-400">
+                              {fmtGbp(priceToPence(variant.pricePounds))}
+                            </p>
+                          )}
                         </Field>
                         <Field
                           label="Active"
@@ -389,6 +413,17 @@ export default function PlanFormPage() {
 function priceToPence(value: string): number {
   const pounds = Number(value);
   return Number.isFinite(pounds) ? Math.max(0, Math.round(pounds * 100)) : 0;
+}
+
+function priceError(value: string): string | null {
+  const trimmed = value.trim();
+  if (trimmed === "") return "Enter a price greater than £0.";
+  const pounds = Number(trimmed);
+  if (!Number.isFinite(pounds)) return "Enter a valid price.";
+  if (pounds <= 0 || Math.round(pounds * 100) < 1) {
+    return "Price must be at least £0.01.";
+  }
+  return null;
 }
 
 function Field({

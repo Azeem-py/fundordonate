@@ -78,9 +78,13 @@ export class PlanVariantDto {
   @Min(1)
   durationDays?: number;
 
-  @ApiProperty({ example: 15000, description: "Price in minor units (pence)." })
+  @ApiProperty({
+    example: 15000,
+    description: "Price in minor units (pence). Must be greater than 0.",
+    minimum: 1,
+  })
   @IsInt()
-  @Min(0)
+  @Min(1, { message: "priceMinor must be greater than 0" })
   priceMinor!: number;
 
   @ApiPropertyOptional({ default: "GBP" })

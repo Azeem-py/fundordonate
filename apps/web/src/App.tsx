@@ -128,7 +128,6 @@ import {
   // People & Participation
   AdminFoundingMembersPage,
   AdminFoundingPage,
-  AdminMembershipPage,
   AdminPlansPage,
   AdminPlanFormPage,
   AdminAccessPassFormPage,
@@ -418,7 +417,7 @@ function App() {
           <Route path="/admin/business-owners/:id/detail" element={<AdminBusinessOwnerDetailPage />} />
           <Route path="/admin/business-owners/businesses" element={<BusinessesManagementPage />} />
           <Route path="/admin/business-owners/campaigns" element={<CampaignsManagement />} />
-          <Route path="/admin/business-owners/membership" element={<AdminMembershipPage />} />
+          <Route path="/admin/business-owners/membership" element={<Navigate to="/admin/membership/plans" replace />} />
           <Route path="/admin/business-owners/backers" element={<BackersManagementPage />} />
           <Route path="/admin/business-owners/founding-members" element={<AdminFoundingMembersPage />} />
           <Route path="/admin/business-owners/rewards" element={<BusinessRewardsPage />} />
@@ -430,7 +429,7 @@ function App() {
           <Route path="/admin/consumers/list" element={<ConsumersListPage />} />
           <Route path="/admin/consumer-overview/:id" element={<ConsumersListPage />} />
           <Route path="/admin/consumer-overview/campaigns" element={<CampaignsManagement />} />
-          <Route path="/admin/consumer-overview/membership" element={<AdminMembershipPage />} />
+          <Route path="/admin/consumer-overview/membership" element={<Navigate to="/admin/membership/plans" replace />} />
           <Route path="/admin/consumer-overview/backers" element={<BackersManagementPage />} />
           <Route path="/admin/consumer-overview/founding-members" element={<AdminFoundingMembersPage />} />
           <Route path="/admin/consumer-overview/rewards" element={<RewardsPage />} />
@@ -483,7 +482,6 @@ function App() {
           <Route path="/admin/backers" element={<BackersManagementPage />} />
           <Route path="/admin/founding-members" element={<AdminFoundingMembersPage />} />
           <Route path="/admin/founding-programmes" element={<AdminFoundingPage />} />
-          <Route path="/admin/membership" element={<AdminMembershipPage />} />
           <Route path="/admin/membership/plans" element={<AdminPlansPage />} />
           <Route path="/admin/membership/plans/new" element={<AdminPlanFormPage />} />
           <Route path="/admin/membership/plans/:id/edit" element={<AdminPlanFormPage />} />
